@@ -21,10 +21,11 @@ class App extends React.Component {
 
   handleAddTodo = event => {
     event.preventDefault();
-
+    const newTask = this.state.inputText
+    console.log(this.state.inputText)
     this.setState({
-      inputText: ""
-    })
+      tasks: [...this.state.tasks, newTask]
+    }, console.log(this.state.inputText))
   };
 
   handleAddedTodo = event => {
