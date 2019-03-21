@@ -21,23 +21,23 @@ class App extends React.Component {
 
   handleAddTodo = event => {
     event.preventDefault();
-    const newTask = this.state.inputText //declare text input as a new task
-    this.setState({
-      tasks: [...this.state.tasks, newTask] //create new array with original tasks using spread operator and add new input text to that array
-    // const newTask = [...this.state.tasks,
-    //   { 
-    //     task: this.state.inputText, 
-    //     id: Date.now(), 
-    //     completed: false
-    //   }
-    // ];
+    // const newTask = this.state.inputText //declare text input as a new task
     // this.setState({
-    //   tasks: newTask,
-    //   inputText:''
+    //   tasks: [...this.state.tasks, newTask] //create new array with original tasks using spread operator and add new input text to that array
+    const newTask = 
+      { 
+        task: this.state.inputText, 
+        id: Date.now(), 
+        completed: false
+      }
+    ;
+    this.setState({
+      tasks: [...this.state.tasks, newTask]
     })
   };
 
   TodoDone = id => {
+    console.log(id);
     this.setState({
       tasks: this.state.tasks.map(done => {
         if (done.id === id) {
