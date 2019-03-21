@@ -2,9 +2,10 @@ import React from 'react';
 import './Todo.css';
 
 const Todo = props => {
+    console.log(props)
     return (
-        <h2 onClick={() => props.handleAddedTodo(props.todoInfo.id)}>
-        {props.todoInfo}</h2>
+        <h2 className="ToDoDone" onClick={() => props.ToDoDone()}>
+        {123}</h2>
     )
 };
 

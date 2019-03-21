@@ -8,12 +8,12 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      tasks: [],
-      inputText: ""
+      tasks: [], //tasks is an empty array
+      inputText: ''
     }
-  };
+  };  
 
-  handleChange = event => {
+  handleChange = event => { //changes placeholder to input text
     this.setState({
       inputText: event.target.value
     })
@@ -21,16 +21,33 @@ class App extends React.Component {
 
   handleAddTodo = event => {
     event.preventDefault();
-    const newTask = this.state.inputText
-    console.log(this.state.inputText)
+    const newTask = this.state.inputText //declare text input as a new task
     this.setState({
-      tasks: [...this.state.tasks, newTask]
-    }, console.log(this.state.inputText))
+      tasks: [...this.state.tasks, newTask] //create new array with original tasks using spread operator and add new input text to that array
+    // const newTask = [...this.state.tasks,
+    //   { 
+    //     task: this.state.inputText, 
+    //     id: Date.now(), 
+    //     completed: false
+    //   }
+    // ];
+    // this.setState({
+    //   tasks: newTask,
+    //   inputText:''
+    })
   };
 
-  handleAddedTodo = event => {
+  TodoDone = id => {
     this.setState({
-      inputText: event.target.value
+      tasks: this.state.tasks.map(done => {
+        if (done.id === id) {
+          return {
+            ...done,
+            completed: done.completed === false ? true : false };
+          } else {
+            return done;
+        } 
+      })
     })
   };
 
@@ -40,7 +57,7 @@ class App extends React.Component {
         <h2>Welcome to your Todo App!</h2>
         <TodoList
           todoList={this.state.tasks}
-          handleAddedTodo={this.handleAddedTodo}
+          ToDoDone={this.TodoDone}
           />
         <TodoForm
           handleChange={this.handleChange}

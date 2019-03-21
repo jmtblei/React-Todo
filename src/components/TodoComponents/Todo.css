@@ -1,0 +1,11 @@
+.ToDoDone {
+    cursor: pointer;
+}
+
+.ToDoDone.false {
+    text-decoration: none;
+}
+
+.ToDoDone.true {
+    text-decoration: line-through;
+}
