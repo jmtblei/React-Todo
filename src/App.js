@@ -15,58 +15,45 @@ class App extends React.Component {
 
   handleChange = event => { //changes placeholder to input text
     this.setState({
-      inputText: event.target.value
+      [event.target.name]: event.target.value
     })
   };
 
   handleAddTodo = event => {
     event.preventDefault();
-    // const newTask = this.state.inputText //declare text input as a new task
-    // this.setState({
-    //   tasks: [...this.state.tasks, newTask] //create new array with original tasks using spread operator and add new input text to that array
-    const newTask = 
+    const newTask = //declare text input as new task with id and completed properties
       { 
         task: this.state.inputText, 
         id: Date.now(), 
         completed: false
       }
     ;
-    this.setState({
-      tasks: [...this.state.tasks, newTask]
+    this.setState({ //create new array with original tasks using spread operator and return input text as new task. returns inputtext back to empty 
+      tasks: [...this.state.tasks, newTask],
+      inputText:''
     })
   };
 
   todoDone = id => {
+    let tasks = this.state.tasks.slice();
+    tasks = tasks.map(task => {
+      if (task.id === id) { //checks id and toggles boolean from false to true
+        task.completed = !task.completed; 
+        return task;
+      } else {
+        return task;
+      }
+    });
     this.setState({
-      tasks: this.state.tasks.map(task => {
-        if (task.id === id) {
-          return {
-            ...task,
-            completed: task.completed = !task.completed};
-          } else {
-            return task;
-        } 
-      })
+      tasks
     })
   };
-  //   let tasks = this.state.tasks.slice();
-  //   tasks = tasks.map(task => {
-  //     if (task.id === id) {
-  //       task.completed = !task.completed;
-  //       return task;
-  //     } else {
-  //       return task;
-  //     }
-  //   });
-  //   this.setState({
-  //     tasks
-  //   })
-  // };
 
-  removeCompleted = event => {
+  removeCompleted = event => { //return new array with completed tasks filtered out
     event.preventDefault();
-    this.setState({
-      tasks: this.state.tasks.filter(task => !task.completed)
+    let tasks = this.state.tasks.filter(task => !task.completed)
+      this.setState({
+        tasks
     })
   };
 
@@ -81,7 +68,7 @@ class App extends React.Component {
         <TodoForm
           handleChange={this.handleChange}
           handleAddTodo={this.handleAddTodo}
-          inputText={this.state.inputText}
+          value={this.state.inputText}
           removeCompleted={this.removeCompleted}
         />
       </div>
