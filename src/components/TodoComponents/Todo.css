@@ -1,11 +1,11 @@
-.ToDoDone {
+.todoDone {
     cursor: pointer;
 }
 
-.ToDoDone.false {
+.todoDone.false {
     text-decoration: none;
 }
 
-.ToDoDone.true {
+.todoDone.true {
     text-decoration: line-through;
 }

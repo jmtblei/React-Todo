@@ -36,18 +36,37 @@ class App extends React.Component {
     })
   };
 
-  TodoDone = id => {
-    console.log(id);
+  todoDone = id => {
     this.setState({
-      tasks: this.state.tasks.map(done => {
-        if (done.id === id) {
+      tasks: this.state.tasks.map(task => {
+        if (task.id === id) {
           return {
-            ...done,
-            completed: done.completed === false ? true : false };
+            ...task,
+            completed: task.completed = !task.completed};
           } else {
-            return done;
+            return task;
         } 
       })
+    })
+  };
+  //   let tasks = this.state.tasks.slice();
+  //   tasks = tasks.map(task => {
+  //     if (task.id === id) {
+  //       task.completed = !task.completed;
+  //       return task;
+  //     } else {
+  //       return task;
+  //     }
+  //   });
+  //   this.setState({
+  //     tasks
+  //   })
+  // };
+
+  removeCompleted = event => {
+    event.preventDefault();
+    this.setState({
+      tasks: this.state.tasks.filter(task => !task.completed)
     })
   };
 
@@ -57,12 +76,13 @@ class App extends React.Component {
         <h2>Welcome to your Todo App!</h2>
         <TodoList
           todoList={this.state.tasks}
-          ToDoDone={this.TodoDone}
+          todoDone={this.todoDone}
           />
         <TodoForm
           handleChange={this.handleChange}
           handleAddTodo={this.handleAddTodo}
           inputText={this.state.inputText}
+          removeCompleted={this.removeCompleted}
         />
       </div>
     )
